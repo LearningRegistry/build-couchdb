@@ -18,7 +18,7 @@ def detect_distro
 
   # Ubuntu
   if File.exist? '/etc/lsb-release'
-    info = Hash[ *File.new('/etc/lsb-release').lines.map{ |x| x.split('=').map { |y| y.chomp } }.flatten ]
+    info = Hash[ *File.new('/etc/lsb-release').each_line.map{ |x| x.split('=').map { |y| y.chomp } }.flatten ]
     if info['DISTRIB_ID'] == 'Ubuntu'
       return [:ubuntu, info['DISTRIB_RELEASE']]
     elsif info['DISTRIB_ID'] == 'LinuxMint'
