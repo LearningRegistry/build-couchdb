@@ -51,7 +51,7 @@ namespace :erlang do
 			env_erl_cflags = ENV['erl_cflags']
 			cflags += " #{env_erl_cflags}"
 		end
-		
+
         configure = [
           "CFLAGS='#{cflags}'",
           "LDFLAGS='#{ldflags}'",
@@ -65,6 +65,7 @@ namespace :erlang do
           '--disable-hipe',
           '--enable-kernel-poll',
           '--disable-sctp',
+          '--disable-docs',
           "--with-ssl",
           '--enable-dynamic-ssl-lib',
         ]
@@ -152,7 +153,7 @@ namespace :erlang do
     (OTP_REMOVE + OTP_SKIP_COMPILE).each do |component|
 	  if File.directory?("#{lib}/#{component}")
         sh "rm -rf #{lib}/#{component}-*" unless otp_app_useful?(component)
-	  end	
+	  end
     end
 
     # Remove unnecessary directories for running.
